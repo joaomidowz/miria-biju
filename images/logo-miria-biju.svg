@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Miriã Biju</title>
+  <desc id="desc">Símbolo preto em formato de coração com linhas internas.</desc>
+  <rect width="240" height="240" rx="44" fill="#fbfaf7"/>
+  <path
+    d="M120 185 51 116c-23-23-15-58 17-68 19-6 38 1 52 18 14-17 33-24 52-18 32 10 40 45 17 68l-69 69Z"
+    fill="none"
+    stroke="#050505"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="32"
+  />
+  <path
+    d="M73 92 120 139l47-47"
+    fill="none"
+    stroke="#050505"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="24"
+  />
+  <path
+    d="M91 66 120 95l29-29"
+    fill="none"
+    stroke="#050505"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="20"
+  />
+</svg>
