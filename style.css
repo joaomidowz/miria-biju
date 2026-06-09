@@ -4,8 +4,8 @@
   --paper-blue: #e8f7f7;
   --aqua: #68c6c6;
   --aqua-dark: #2d8f8f;
-  --ink: #050505;
-  --text: #202222;
+  --ink: #3b4040;
+  --text: #353939;
   --muted: #686d6d;
   --white-soft: #fdfbf4;
   --gold: #c5a35a;
@@ -255,7 +255,7 @@ button {
 }
 
 .btn-primary {
-  color: var(--ink);
+  color: var(--paper);
   background: var(--aqua);
   box-shadow: 0 14px 32px rgba(104, 198, 198, 0.28);
 }
@@ -786,7 +786,7 @@ h2 {
   margin-bottom: 12px;
   border-radius: 999px;
   padding: 6px 10px;
-  color: var(--ink);
+  color: var(--paper);
   background: var(--aqua);
   font-size: 0.82rem;
   font-weight: 900;
