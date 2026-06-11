@@ -79,10 +79,12 @@
     <header class="site-header" id="siteHeader">
       <div class="header-inner">
         <a class="brand" href="#inicio" aria-label="Miriã Biju">
-          <span class="brand-mark" aria-hidden="true">
-            <img src="images/logo-miria-biju.svg" alt="" />
-          </span>
-          <span class="brand-name">Miriã Biju</span>
+          <img
+            class="brand-logo"
+            src="images/logo-miria-biju-horizontal.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </a>
 
         <nav class="desktop-nav" aria-label="Navegação principal">
@@ -155,7 +157,10 @@
               </svg>
             </span>
             <strong>100% livres de alergia</strong>
-            <p>Peças pensadas para uso confortável no dia a dia.</p>
+            <p>
+              Peças pensadas para pessoas com a pele sensível. Todas com Banho de
+              Paládio e Verniz Cataforético.
+            </p>
           </article>
 
           <article class="quick-item reveal">
@@ -166,7 +171,10 @@
               </svg>
             </span>
             <strong>Sem níquel</strong>
-            <p>Uma escolha mais segura para peles sensíveis.</p>
+            <p>
+              Além do banho e verniz, buscamos peças níquel free, principal agente
+              causador de inflamações.
+            </p>
           </article>
 
           <article class="quick-item reveal">
@@ -180,7 +188,7 @@
               </svg>
             </span>
             <strong>Presente com cuidado</strong>
-            <p>A equipe ajuda a combinar a peça com a ocasião.</p>
+            <p>A equipe de atendimento ajuda você a combinar a peça com a ocasião.</p>
           </article>
 
           <article class="quick-item reveal">
@@ -191,7 +199,10 @@
               </svg>
             </span>
             <strong>4 quiosques</strong>
-            <p>Atendimento em Cascavel e Toledo.</p>
+            <p>
+              Atendimento na região leste, oeste e norte de Cascavel, bem como também
+              uma unidade em Toledo.
+            </p>
           </article>
         </div>
       </section>
@@ -233,20 +244,15 @@
         <div class="container">
           <div class="section-heading reveal">
             <p class="eyebrow">Acessórios</p>
-            <h2>Espaço para exemplos de peças</h2>
+            <h2>Peças que destacam sua beleza em cada detalhe</h2>
             <p>
-              O carrossel já está preparado para receber de 9 a 18 imagens quadradas.
-              Por enquanto, deixei os espaços reservados para as fotos.
+              Encontre acessórios delicados, versáteis e cheios de personalidade para
+              completar seu estilo ou transformar um presente em um momento inesquecível.
             </p>
           </div>
 
           <div class="carousel" data-carousel>
             <div class="carousel-top">
-              <div class="carousel-count" aria-live="polite">
-                <span data-carousel-current>1</span>
-                <span>/</span>
-                <span data-carousel-total>12</span>
-              </div>
               <div class="carousel-controls">
                 <button class="icon-btn" type="button" data-carousel-prev aria-label="Acessório anterior">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -374,46 +380,77 @@
           </div>
 
           <div class="location-layout reveal">
-            <div class="store-tabs" role="tablist" aria-label="Quiosques Miriã Biju">
+            <div class="store-tabs-shell">
               <button
-                class="store-tab is-active"
+                class="store-scroll-control store-scroll-prev"
                 type="button"
-                role="tab"
-                aria-selected="true"
-                data-store-tab="irani-alto-alegre"
+                data-store-scroll-prev
+                aria-label="Ver quiosques anteriores"
+                hidden
               >
-                <span>Irani</span>
-                <strong>Alto Alegre</strong>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
               </button>
-              <button
-                class="store-tab"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-store-tab="allmayer-sao-cristovao"
+
+              <div
+                class="store-tabs"
+                role="tablist"
+                aria-label="Quiosques Miriã Biju"
+                data-store-tabs
               >
-                <span>Allmayer</span>
-                <strong>São Cristóvão</strong>
-              </button>
+                <button
+                  class="store-tab is-active"
+                  type="button"
+                  role="tab"
+                  aria-selected="true"
+                  data-store-tab="irani-alto-alegre"
+                >
+                  <span>Irani</span>
+                  <strong>Alto Alegre</strong>
+                </button>
+                <button
+                  class="store-tab"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-store-tab="allmayer-sao-cristovao"
+                >
+                  <span>Allmayer</span>
+                  <strong>São Cristóvão</strong>
+                </button>
+                <button
+                  class="store-tab"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-store-tab="irani-floresta"
+                >
+                  <span>Irani</span>
+                  <strong>Floresta</strong>
+                </button>
+                <button
+                  class="store-tab"
+                  type="button"
+                  role="tab"
+                  aria-selected="false"
+                  data-store-tab="max-toledo"
+                >
+                  <span>Max</span>
+                  <strong>Toledo</strong>
+                </button>
+              </div>
+
               <button
-                class="store-tab"
+                class="store-scroll-control store-scroll-next"
                 type="button"
-                role="tab"
-                aria-selected="false"
-                data-store-tab="irani-floresta"
+                data-store-scroll-next
+                aria-label="Ver próximos quiosques"
+                hidden
               >
-                <span>Irani</span>
-                <strong>Floresta</strong>
-              </button>
-              <button
-                class="store-tab"
-                type="button"
-                role="tab"
-                aria-selected="false"
-                data-store-tab="max-toledo"
-              >
-                <span>Max</span>
-                <strong>Toledo</strong>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
               </button>
             </div>
 
@@ -451,27 +488,75 @@
 
     <footer class="site-footer">
       <div class="container footer-grid">
-        <a class="footer-brand" href="#inicio" aria-label="Miriã Biju">
-          <span class="footer-logo" aria-hidden="true">
-            <img src="images/logo-miria-biju.svg" alt="" />
-          </span>
-          <span>Miriã Biju</span>
-        </a>
-        <p>Bijus hipoalergênicas, sem níquel e feitas para criar vínculos.</p>
-        <a class="footer-link" href="#localizacao">Ver quiosques</a>
+        <div class="footer-about">
+          <a class="footer-brand" href="#inicio" aria-label="Miriã Biju">
+            <span class="footer-logo" aria-hidden="true">
+              <img src="images/logo-miria-biju.svg" alt="" />
+            </span>
+            <span>Miriã Biju</span>
+          </a>
+          <p>Bijus hipoalergênicas, sem níquel e feitas para criar vínculos.</p>
+          <a class="footer-link" href="#localizacao">Ver quiosques</a>
+        </div>
+
+        <div class="footer-contact">
+          <strong>Contato</strong>
+          <a href="mailto:revendamiriabiju@gmail.com">revendamiriabiju@gmail.com</a>
+        </div>
+
+        <form class="newsletter-form" aria-label="Inscrição na newsletter">
+          <label for="newsletterEmail">
+            <strong>Newsletter</strong>
+            <span>Receba novidades sobre peças, coleções e quiosques.</span>
+          </label>
+          <div class="newsletter-row">
+            <input
+              id="newsletterEmail"
+              type="email"
+              name="email"
+              placeholder="Seu melhor e-mail"
+              autocomplete="email"
+            />
+            <button type="button">Inscrever-se</button>
+          </div>
+        </form>
       </div>
     </footer>
 
-    <button
-      class="whatsapp-float"
-      type="button"
-      data-whatsapp
-      aria-label="Chamar a Miriã Biju no WhatsApp"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3a9 9 0 0 0-7.7 13.6L3.4 21l4.5-1.1A9 9 0 1 0 12 3Z" />
-        <path d="M8.6 8.6c.2-.5.4-.6.8-.6h.6c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.7l.6-.7c.2-.2.5-.2.8-.1l1.6.8c.3.1.4.3.4.6 0 .7-.5 1.7-1.2 2-.8.3-2.8-.1-4.7-1.8-2-1.8-2.8-4.1-2.4-5.3Z" />
-      </svg>
-    </button>
+    <div class="whatsapp-widget" data-whatsapp-widget>
+      <div class="whatsapp-menu" id="whatsappMenu" hidden>
+        <p>Como podemos ajudar?</p>
+        <a
+          href="https://wa.me/5545991068219?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Miri%C3%A3%20Biju%20e%20gostaria%20de%20falar%20com%20o%20setor%20administrativo%20ou%20comercial."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Administrativo e comercial</strong>
+          <span>(45) 99106-8219</span>
+        </a>
+        <a
+          href="https://wa.me/5545991112774?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Miri%C3%A3%20Biju%20e%20gostaria%20de%20saber%20mais%20sobre%20pe%C3%A7as%20e%20cole%C3%A7%C3%B5es."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Peças e coleções</strong>
+          <span>(45) 99111-2774</span>
+        </a>
+      </div>
+
+      <button
+        class="whatsapp-float"
+        type="button"
+        data-whatsapp-toggle
+        aria-label="Ver opções de atendimento pelo WhatsApp"
+        aria-controls="whatsappMenu"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3a9 9 0 0 0-7.7 13.6L3.4 21l4.5-1.1A9 9 0 1 0 12 3Z" />
+          <path d="M8.6 8.6c.2-.5.4-.6.8-.6h.6c.2 0 .4.1.5.4l.7 1.7c.1.3.1.5-.1.7l-.4.5c.7 1.2 1.6 2.1 2.8 2.7l.6-.7c.2-.2.5-.2.8-.1l1.6.8c.3.1.4.3.4.6 0 .7-.5 1.7-1.2 2-.8.3-2.8-.1-4.7-1.8-2-1.8-2.8-4.1-2.4-5.3Z" />
+        </svg>
+      </button>
+    </div>
   </body>
 </html>

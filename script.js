@@ -1,7 +1,3 @@
-const WHATSAPP_NUMBER = "5545991112774";
-const WHATSAPP_MESSAGE =
-  "Olá! Vim pelo site da Miriã Biju e gostaria de saber mais sobre as peças e quiosques.";
-
 const STORES = {
   "irani-alto-alegre": {
     name: "Irani Supermercado - Alto Alegre",
@@ -34,14 +30,19 @@ const menuToggle = document.querySelector(".menu-toggle");
 const mobileMenu = document.querySelector("#mobileMenu");
 const revealElements = document.querySelectorAll(".reveal");
 const carousels = document.querySelectorAll("[data-carousel]");
+const storeTabsTrack = document.querySelector("[data-store-tabs]");
 const storeTabs = document.querySelectorAll("[data-store-tab]");
+const storeScrollPrev = document.querySelector("[data-store-scroll-prev]");
+const storeScrollNext = document.querySelector("[data-store-scroll-next]");
 const storeName = document.querySelector("[data-store-name]");
 const storeCity = document.querySelector("[data-store-city]");
 const storeAddress = document.querySelector("[data-store-address]");
 const storeRoute = document.querySelector("[data-store-route]");
 const storeMap = document.querySelector("[data-store-map]");
 const copyAddressButton = document.querySelector("[data-copy-address]");
-const whatsappButtons = document.querySelectorAll("[data-whatsapp]");
+const whatsappWidget = document.querySelector("[data-whatsapp-widget]");
+const whatsappToggle = document.querySelector("[data-whatsapp-toggle]");
+const whatsappMenu = document.querySelector("#whatsappMenu");
 
 let selectedStore = "irani-alto-alegre";
 
@@ -51,14 +52,6 @@ function buildMapEmbed(query) {
 
 function buildRouteLink(query) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(query)}`;
-}
-
-function buildWhatsAppUrl() {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-}
-
-function openExternal(url) {
-  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 function updateHeaderState() {
@@ -85,6 +78,26 @@ function toggleMobileMenu() {
   menuToggle.setAttribute("aria-label", willOpen ? "Fechar menu" : "Abrir menu");
   header.classList.toggle("menu-active", willOpen);
   document.body.classList.toggle("menu-open", willOpen);
+}
+
+function closeWhatsAppMenu() {
+  if (!whatsappMenu || !whatsappToggle) return;
+
+  whatsappMenu.hidden = true;
+  whatsappToggle.setAttribute("aria-expanded", "false");
+  whatsappToggle.setAttribute("aria-label", "Ver opções de atendimento pelo WhatsApp");
+}
+
+function toggleWhatsAppMenu() {
+  if (!whatsappMenu || !whatsappToggle) return;
+
+  const willOpen = whatsappMenu.hidden;
+  whatsappMenu.hidden = !willOpen;
+  whatsappToggle.setAttribute("aria-expanded", String(willOpen));
+  whatsappToggle.setAttribute(
+    "aria-label",
+    willOpen ? "Fechar opções de atendimento" : "Ver opções de atendimento pelo WhatsApp"
+  );
 }
 
 function updateStore(storeId) {
@@ -127,8 +140,33 @@ function setupStorePicker() {
     tab.addEventListener("click", () => updateStore(tab.dataset.storeTab));
   });
 
+  function updateStoreScrollControls() {
+    if (!storeTabsTrack || !storeScrollPrev || !storeScrollNext) return;
+
+    const maxScrollLeft = storeTabsTrack.scrollWidth - storeTabsTrack.clientWidth;
+    const hasOverflow = maxScrollLeft > 2;
+
+    storeScrollPrev.hidden = !hasOverflow || storeTabsTrack.scrollLeft <= 2;
+    storeScrollNext.hidden = !hasOverflow || storeTabsTrack.scrollLeft >= maxScrollLeft - 2;
+  }
+
+  function scrollStoreTabs(direction) {
+    if (!storeTabsTrack || !storeTabs.length) return;
+
+    const styles = window.getComputedStyle(storeTabsTrack);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    const step = storeTabs[0].getBoundingClientRect().width + gap;
+    storeTabsTrack.scrollBy({ left: direction * step, behavior: "smooth" });
+  }
+
+  storeScrollPrev?.addEventListener("click", () => scrollStoreTabs(-1));
+  storeScrollNext?.addEventListener("click", () => scrollStoreTabs(1));
+  storeTabsTrack?.addEventListener("scroll", updateStoreScrollControls, { passive: true });
+  window.addEventListener("resize", updateStoreScrollControls);
+
   copyAddressButton?.addEventListener("click", copySelectedAddress);
   updateStore(selectedStore);
+  window.requestAnimationFrame(updateStoreScrollControls);
 }
 
 function setupCarousels() {
@@ -137,14 +175,8 @@ function setupCarousels() {
     const cards = [...carousel.querySelectorAll(".accessory-card")];
     const prev = carousel.querySelector("[data-carousel-prev]");
     const next = carousel.querySelector("[data-carousel-next]");
-    const current = carousel.querySelector("[data-carousel-current]");
-    const total = carousel.querySelector("[data-carousel-total]");
 
     if (!track || !cards.length) return;
-
-    if (total) {
-      total.textContent = String(cards.length);
-    }
 
     function getCardStep() {
       const styles = window.getComputedStyle(track);
@@ -160,26 +192,6 @@ function setupCarousels() {
       track.scrollTo({ left, behavior });
     }
 
-    function updateCurrentSlide() {
-      const trackCenter = track.scrollLeft + track.clientWidth / 2;
-      let activeIndex = 0;
-      let activeDistance = Number.POSITIVE_INFINITY;
-
-      cards.forEach((card, index) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const distance = Math.abs(trackCenter - cardCenter);
-
-        if (distance < activeDistance) {
-          activeDistance = distance;
-          activeIndex = index;
-        }
-      });
-
-      if (current) {
-        current.textContent = String(activeIndex + 1);
-      }
-    }
-
     prev?.addEventListener("click", () => {
       track.scrollBy({ left: -getCardStep(), behavior: "smooth" });
     });
@@ -188,7 +200,6 @@ function setupCarousels() {
       track.scrollBy({ left: getCardStep(), behavior: "smooth" });
     });
 
-    track.addEventListener("scroll", updateCurrentSlide, { passive: true });
     track.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
@@ -205,8 +216,6 @@ function setupCarousels() {
       if (window.innerWidth <= 760 && cards.length > 2) {
         centerCard(1, "auto");
       }
-
-      updateCurrentSlide();
     });
   });
 }
@@ -243,13 +252,22 @@ mobileMenu?.querySelectorAll("a, button").forEach((item) => {
   item.addEventListener("click", closeMobileMenu);
 });
 
-whatsappButtons.forEach((button) => {
-  button.addEventListener("click", () => openExternal(buildWhatsAppUrl()));
+whatsappToggle?.addEventListener("click", toggleWhatsAppMenu);
+
+whatsappMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", closeWhatsAppMenu);
+});
+
+document.addEventListener("click", (event) => {
+  if (!whatsappWidget?.contains(event.target)) {
+    closeWhatsAppMenu();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMobileMenu();
+    closeWhatsAppMenu();
   }
 });
 
