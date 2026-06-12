@@ -266,23 +266,27 @@ button {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background:
-    linear-gradient(120deg, rgba(104, 198, 198, 0.24), rgba(251, 250, 247, 0.88) 38%, rgba(251, 250, 247, 0.98)),
-    repeating-linear-gradient(90deg, rgba(5, 5, 5, 0.018) 0 1px, transparent 1px 62px),
-    var(--paper);
+  background: url("images/bakcground-desktop.png") center / cover no-repeat;
 }
 
-.hero::after {
+.hero::before {
   content: "";
   position: absolute;
-  right: -80px;
-  bottom: -90px;
-  width: 460px;
-  height: 460px;
-  border: 1px solid rgba(104, 198, 198, 0.44);
-  border-radius: 50%;
-  opacity: 0.7;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, transparent 68%, rgba(251, 250, 247, 0.72) 87%, var(--paper) 100%),
+    linear-gradient(
+      90deg,
+      rgba(104, 198, 198, 0.82) 0%,
+      rgba(104, 198, 198, 0.7) 32%,
+      rgba(104, 198, 198, 0.4) 54%,
+      rgba(104, 198, 198, 0.05) 82%
+    );
+  backdrop-filter: blur(1.4px);
+  pointer-events: none;
 }
+
 
 .hero-watermark {
   position: absolute;
@@ -290,17 +294,40 @@ button {
   top: 24%;
   width: 330px;
   max-width: 52vw;
+  z-index: 1;
   opacity: 0.06;
   pointer-events: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .hero-copy {
   max-width: 720px;
+}
+
+.hero .eyebrow {
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgba(23, 45, 45, 0.48);
+}
+
+.hero h1 {
+  color: var(--paper);;
+  text-shadow: 0 2px 12px rgba(18, 66, 54, 0.72);
+}
+
+.hero .hero-lead,
+.hero .hero-text {
+  color: var(--paper);
+  text-shadow: 0 2px 12px rgba(18, 66, 54, 0.72);
+}
+
+.hero .btn-primary {
+  color: var(--paper);
+  background: #10C8D1;
+  box-shadow: 0 14px 32px rgba(71, 130, 95, 0.3);
 }
 
 .eyebrow {
@@ -367,7 +394,23 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 24px;
+  margin-top: 8px;
+}
+
+.hero-points-label {
+  color: var(--paper);
+  font-size: 0.86rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(18, 66, 54, 0.58);
+}
+
+@media (min-width: 761px) {
+  .hero-points-label {
+    text-align: left;
+  }
 }
 
 .hero-points span,
@@ -1138,6 +1181,20 @@ h2 {
   .hero {
     min-height: 82svh;
     padding: 122px 0 62px;
+    background: url("images/foto-fundo-inicial.jpeg") center 34% / cover no-repeat;
+  }
+
+  .hero::before {
+    background:
+      linear-gradient(180deg, transparent 66%, rgba(251, 250, 247, 0.78) 86%, var(--paper) 100%),
+      linear-gradient(
+        90deg,
+        rgba(104, 198, 198, 0.8) 0%,
+        rgba(104, 198, 198, 0.64) 42%,
+        rgba(104, 198, 198, 0.32) 72%,
+        rgba(104, 198, 198, 0.06) 100%
+      );
+    backdrop-filter: blur(1.6px);
   }
 
   h1 {
@@ -1169,6 +1226,14 @@ h2 {
 
   .section {
     padding: 68px 0;
+  }
+
+  #aliancas {
+    padding-bottom: 36px;
+  }
+
+  .section-location {
+    padding-top: 36px;
   }
 
   .quick-strip {
