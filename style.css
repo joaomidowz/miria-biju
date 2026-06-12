@@ -732,6 +732,7 @@ h2 {
 }
 
 .section-location {
+  padding-bottom: 52px;
   background:
     linear-gradient(180deg, var(--paper) 0%, var(--paper-soft) 100%);
 }
@@ -850,6 +851,113 @@ h2 {
   height: 100%;
   min-height: 300px;
   border: 0;
+}
+
+.faq-section {
+  padding-top: 52px;
+  border-top: 1px solid rgba(5, 5, 5, 0.06);
+  background:
+    linear-gradient(180deg, var(--paper-soft), var(--paper));
+}
+
+.faq-container {
+  max-width: 900px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.faq-item {
+  overflow: hidden;
+  border: 1px solid rgba(5, 5, 5, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 254, 250, 0.86);
+  box-shadow: 0 12px 32px rgba(23, 45, 45, 0.07);
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.faq-item:has(.faq-question[aria-expanded="true"]) {
+  border-color: rgba(104, 198, 198, 0.72);
+  box-shadow: 0 18px 42px rgba(23, 45, 45, 0.11);
+}
+
+.faq-item h3 {
+  margin: 0;
+}
+
+.faq-question {
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.faq-question:hover,
+.faq-question:focus-visible {
+  background: var(--paper-blue);
+}
+
+.faq-question:focus-visible {
+  outline: 2px solid var(--aqua-dark);
+  outline-offset: -3px;
+}
+
+.faq-icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  flex: 0 0 auto;
+  border: 1px solid rgba(104, 198, 198, 0.6);
+  border-radius: 50%;
+  background: var(--paper-blue);
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease;
+}
+
+.faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.faq-question[aria-expanded="true"] .faq-icon::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.faq-answer {
+  padding: 0 20px 20px;
+  color: var(--muted);
+}
+
+.faq-answer p {
+  margin: 0;
+}
+
+.faq-answer p + p {
+  margin-top: 12px;
 }
 
 .site-footer {
@@ -1234,6 +1342,24 @@ h2 {
 
   .section-location {
     padding-top: 36px;
+    padding-bottom: 30px;
+  }
+
+  .faq-section {
+    padding-top: 30px;
+  }
+
+  .faq-list {
+    margin-top: 28px;
+  }
+
+  .faq-question {
+    min-height: 70px;
+    padding: 16px;
+  }
+
+  .faq-answer {
+    padding: 0 16px 18px;
   }
 
   .quick-strip {

@@ -43,6 +43,7 @@ const copyAddressButton = document.querySelector("[data-copy-address]");
 const whatsappWidget = document.querySelector("[data-whatsapp-widget]");
 const whatsappToggle = document.querySelector("[data-whatsapp-toggle]");
 const whatsappMenu = document.querySelector("#whatsappMenu");
+const faqQuestions = document.querySelectorAll("[data-faq-question]");
 
 let selectedStore = "irani-alto-alegre";
 
@@ -220,6 +221,31 @@ function setupCarousels() {
   });
 }
 
+function setupFaq() {
+  faqQuestions.forEach((question) => {
+    question.addEventListener("click", () => {
+      const answerId = question.getAttribute("aria-controls");
+      const answer = answerId ? document.querySelector(`#${answerId}`) : null;
+      const willOpen = question.getAttribute("aria-expanded") !== "true";
+
+      faqQuestions.forEach((otherQuestion) => {
+        const otherAnswerId = otherQuestion.getAttribute("aria-controls");
+        const otherAnswer = otherAnswerId
+          ? document.querySelector(`#${otherAnswerId}`)
+          : null;
+
+        otherQuestion.setAttribute("aria-expanded", "false");
+        if (otherAnswer) otherAnswer.hidden = true;
+      });
+
+      if (willOpen && answer) {
+        question.setAttribute("aria-expanded", "true");
+        answer.hidden = false;
+      }
+    });
+  });
+}
+
 function setupRevealAnimations() {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -280,5 +306,6 @@ window.addEventListener("resize", () => {
 
 setupStorePicker();
 setupCarousels();
+setupFaq();
 setupRevealAnimations();
 updateHeaderState();
